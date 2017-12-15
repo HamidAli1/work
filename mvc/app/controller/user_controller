@@ -1,0 +1,17 @@
+<?php
+
+require_once('../core/controler.php');
+
+class user_controller extends controller{
+
+function __construct{
+
+}
+function index{
+
+echo "user controller called \n";
+}
+
+}
+
+?>
