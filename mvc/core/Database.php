@@ -6,13 +6,14 @@ class Database{
 	private $servername = "localhost";
 	private $username = "root";
 	private $password = "123";
+	private $dbname = "HamidDB";
 
 	private function __clone() { }
 
 	private function __construct()
 	{
 		
-		$this->conn = new mysqli($this->servername, $this->username, $this->password);
+		$this->conn = new mysqli($this->servername, $this->username, $this->password,$this->dbname);
 		// Check connection
 		if ($this->conn->connect_error) 
 		{
@@ -38,9 +39,8 @@ class Database{
 
 
 
- $db = Database::getInstance()->getConnection();
+ 
     
-    $sql_query = "CREATE DATABASE goodonne";
-    $result = $db->query($sql_query);
+   
 
 ?>

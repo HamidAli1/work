@@ -6,30 +6,43 @@ class Controller
  public function __construct()
   {
 
- 	//die("controller called \n");
 
   }
-  public function index()
+  public function index($params)
   {
    
   }
 
- public static function build($save) {
+  public function create($params)
+  {
+   
+  }
+  public function update($params)
+  {
+   
+  }
+   public function insert($params)
+  {
+   
+  }
+  public function delete($params)
+  {
+   
+  }
+  public static function build($save) {
         // assumes the use of an autoloader
        
-      $type=$save."Controller";
-	
-	
+
+        $type=$save."Controller";
         if (class_exists($type)) {
-
-
-
             return new $type($save);
         }
-        else {
+        else
+         {
+
             throw new Exception("Invalid product type given.");
         }
-    } 
+  } 
 
 
 

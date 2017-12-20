@@ -1,24 +1,44 @@
 <?php
 require_once('../core/Model.php');
+require_once('../core/Database.php');
+class UserModel extends Model{
 
-class UserModel{
+	
 
 
 	public function __construct()
 	{
-			echo "user model called \n";
+		 
+		Model::__construct();
+
+
+		
+		$this->table_name='MyGuests';
+		$this->coloms_name=array("id", "firstname", "lastname","email","reg_date");
+
 	}
-	public function read()
+	
+
+
+	
+	public function update($params)
 	{
+			
+
+		$sql = "UPDATE ".$this->tablename." SET firstname='".$params['firstname']."', lastname='".$params['lastname'] ."', email='".$params['email']."', reg_date='".$params['reg_date'] ."' WHERE id=".$params['id'];
+ 		 
+		$result = $this->db->query($sql);
+ 		
 		
 	}
-	public function update()
+	public function delete($params)
 	{
-		
-	}
-	public function delete()
-	{
-		
+
+
+			 $sql_query ="DELETE FROM ".$this->tablename." WHERE id =".$params['id'] ;
+   
+   			 $result = $this->db->query($sql_query);
+	
 	}
 	
 }
