@@ -5,7 +5,6 @@ class App
 	public $controller_name;
   	public $function_name;
   	public $uri;
-  	//public $pieces = array();
   	public $params;
 	function __construct()
 	{
@@ -29,9 +28,15 @@ class App
 
 	function manage_url()
 	{
+
+		
 		$this->uri = $_GET['url'];
 
  		parse_str($_SERVER["QUERY_STRING"], $this->params);
+ 		
+
+ 		unset($this->params['url']);
+ 		
  		
  		
 		return $pieces = explode("/",trim(filter_var( $this->uri ,FILTER_SANITIZE_URL)));

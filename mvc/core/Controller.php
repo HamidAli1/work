@@ -8,12 +8,12 @@ class Controller
 
 
   }
-  public function index($params)
+  public function selectAll($params)
   {
    
   }
 
-  public function create($params)
+  public function create()
   {
    
   }
@@ -21,13 +21,17 @@ class Controller
   {
    
   }
-   public function insert($params)
+   public function insert()
   {
    
   }
   public function delete($params)
   {
    
+  }
+  public function edit($params)
+  {
+
   }
   public static function build($save) {
         // assumes the use of an autoloader

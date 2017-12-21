@@ -2,14 +2,15 @@
 
 require_once('../core/Controller.php');
 
-require_once('../../mvc/core/Model.php');
+require_once('../core/Model.php');
+
 
 
 class UserController extends Controller
 {
 
 	public $model_obj;
-
+	public $params;
 	public  function __construct($type){
 
 		
@@ -21,28 +22,35 @@ class UserController extends Controller
 	public function selectAll($params)
 	{
 
-
-			
 		$result=$this->model_obj->selectAll($params);
-    		
+       
+		require_once('../app/views/show.php');
+		
 
-		if ($result->num_rows > 0) {
-   		 
-    	while($row = $result->fetch_assoc()) {
-        echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-    }
-} 
+		
+    	
+
 	}
-
-	public function create($params)
+	public function edit($params)
 	{
+		$result=$this->model_obj->selectAll($params);
+			require_once('../app/views/edit.php');
+	}
+	public function create()
+	{
+			require_once('../app/views/create.php');
+	}
+	public function insert()
+	{
+
+
+		$this->params['firstname']=$_POST['fname'];
+ 		$this->params['lastname']=$_POST['lname'];
+ 		$this->params['email']=$_POST['email'];
+ 		$this->params['reg_date']=$_POST['reg_date'];
 	
-	}
-	public function insert($params)
-	{
-		echo "dfvxd";
-		die();
-		$this->model_obj->insert($params);
+
+		$this->model_obj->insert($this->params);
 	}
 	
 	public function delete($params)
@@ -50,12 +58,27 @@ class UserController extends Controller
 	$this->model_obj->delete($params);
 	}
 
-	public function update($params)
+	public function update()
 	{
+		$this->params['id']=$_POST['hid'];
+		$this->params['firstname']=$_POST['fname'];
+ 		$this->params['lastname']=$_POST['lname'];
+ 		$this->params['email']=$_POST['email'];
+ 		$this->params['reg_date']=$_POST['reg_date'];
 		
-	$this->model_obj->update($params);
+		$this->model_obj->update($this->params);
 	}
 
 }
+
+if(isset($_POST['good'])){ // button name
+
+
+		
+ 		
+ }
+
+
+
 
 ?>
