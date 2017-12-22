@@ -38,11 +38,9 @@ class StudentController extends Controller
 	}
 	public function create()
 	{
-		//$cobj=Controller::build('Course');
-		//$result=$cobj->getAll();
+
 		require_once('../app/views/StudentCreate.php');
 		
-		 
 	}
 	public function insert()
 	{
@@ -70,8 +68,7 @@ class StudentController extends Controller
 		$this->params['firstname']=$_POST['fname'];
  		$this->params['lastname']=$_POST['lname'];
  		$this->params['email']=$_POST['email'];
- 		$this->params['address']=$_POST['address'];
-		
+ 		$this->params['address']=$_POST['address'];	
 		$this->model_obj->update($this->params);
 		$this->selectAll();
 	}

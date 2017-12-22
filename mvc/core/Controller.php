@@ -36,9 +36,7 @@ class Controller
 
   }
   public static function build($save) {
-        // assumes the use of an autoloader
-     
-  
+        
      
         $type=$save."Controller";
 

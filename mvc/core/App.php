@@ -11,14 +11,8 @@ class App
 		
 		$pieces=$this->manage_url();
  		$saver= ucfirst ($pieces[0]);
-
 		require_once('Controller.php');		
-		
-			//echo "dfd";
-   // die();
-        
 		$this->controller_name=Controller::build($saver);
-		
  		$this->function_name=$pieces[1];
 		call_user_func_array(array($this->controller_name,	$this->function_name),array($this->params));
 		;

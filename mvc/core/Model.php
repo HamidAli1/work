@@ -13,10 +13,7 @@ class Model
 }
 
 public static function build($type) { 
-      
-	   
-         
-        
+       
         $saved=$type."Model";
         require_once ('../app/model/'.$saved. '.php');
       
@@ -41,13 +38,12 @@ public function selectAll($par)
         { 
 
              $m=key($par);
-             $n=$par[$m];
-           
-          $sql = "SELECT * FROM ".$this->table_name. " where ".$m." ='".$n."'"; 
+             $n=$par[$m];          
+             $sql = "SELECT * FROM ".$this->table_name. " where ".$m." ='".$n."'"; 
         }
         else
         {
-         $sql = "SELECT * FROM ".$this->table_name;   
+             $sql = "SELECT * FROM ".$this->table_name;   
         }  
 
          
@@ -58,11 +54,7 @@ public function update($params)
 {
 
 
-             $m=key($params);
-            
-    
-            
-
+     $m=key($params);                           
      $uid=$params[$m];
      unset($params[$m]);
      if (!array_filter($params)) 
@@ -86,7 +78,6 @@ public function update($params)
                 
         }
         $sql=$sql." WHERE ".$m."=".$uid;
-
         $result = $this->db->query($sql);
      }
 
@@ -101,24 +92,18 @@ public function insert($params)
         }
         else
         {
-
               $sql = "INSERT INTO ".$this->table_name;
               $sql .= " (`".implode("`, `", $this->coloms_name)."`)";
               $sql .= " VALUES ('".implode("', '", $params)."') ";
-
-                echo $sql;
               $result = $this->db->query($sql);
         }     
     
 }
 public function delete($par)
 {
-
              $m=key($par);
              $n=$par[$m];
-
              $sql_query ="DELETE FROM ".    $this->table_name." WHERE ".$m." =".$n;
-
              $result = $this->db->query($sql_query);
 
 }
