@@ -43,30 +43,9 @@ Last Name: <input type="text" name="lname"><br>
 
 E-mail: <input type="text" name="email"><br>
 Address: <input type="text" name="address"><br>
-
-<select name='sid'>
-
-<?php
-
-   
-            while($row = $result->fetch_assoc())
-            {
-                $id = $row['cid'];
-                $cname = $row['cname']; 
-
- ?>
-
-                  <option value="<?php echo $id ?>"><?php echo $row['cname'] ?></option>
-<?php             
-                
-            }
-
-?>
-
-</select>>
-
-
-
+ 
+<input type="submit" value="Add Course"  class="button button4" name=''>
+<br>
 <input type="submit"  class="button button4" name='good'>
 </form>
  </body>

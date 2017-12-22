@@ -16,6 +16,9 @@ class StudentController extends Controller
 
 	}
 
+	
+
+
 	public function selectAll($par)
 	{
 
@@ -35,13 +38,8 @@ class StudentController extends Controller
 	}
 	public function create()
 	{
-		$cobj=Controller::build('Course');
-		$result=$cobj->getAll();
-		
-
-	
-
-
+		//$cobj=Controller::build('Course');
+		//$result=$cobj->getAll();
 		require_once('../app/views/StudentCreate.php');
 		
 		 

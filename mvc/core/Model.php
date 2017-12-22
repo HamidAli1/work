@@ -16,14 +16,18 @@ public static function build($type) {
       
 	   
          
+        
         $saved=$type."Model";
         require_once ('../app/model/'.$saved. '.php');
+      
         if (class_exists($saved)) 
         {
+            
           return new $saved();
         }
         else
         {
+
             throw new Exception("Invalid product type given.");
         }
     } 
@@ -52,8 +56,15 @@ public function selectAll($par)
 }
 public function update($params)
 {
-     $uid=$params['id'];
-     unset($params['id']);
+
+
+             $m=key($params);
+            
+    
+            
+
+     $uid=$params[$m];
+     unset($params[$m]);
      if (!array_filter($params)) 
      {
             echo "All the fields cannot be Empty";
@@ -74,7 +85,8 @@ public function update($params)
              }
                 
         }
-        $sql=$sql." WHERE id =".$uid;
+        $sql=$sql." WHERE ".$m."=".$uid;
+
         $result = $this->db->query($sql);
      }
 
@@ -82,7 +94,7 @@ public function update($params)
 public function insert($params)
 {
    
-
+      
         if (!array_filter($params))
         {
              echo "All the fields cannot be Empty";
@@ -93,6 +105,8 @@ public function insert($params)
               $sql = "INSERT INTO ".$this->table_name;
               $sql .= " (`".implode("`, `", $this->coloms_name)."`)";
               $sql .= " VALUES ('".implode("', '", $params)."') ";
+
+                echo $sql;
               $result = $this->db->query($sql);
         }     
     
