@@ -1,12 +1,14 @@
 <?php
-require_once('../app/controller/UserController.php');
-
+require_once('../app/controller/StudentController.php');
+require_once('../app/controller/TeacherController.php');
+require_once('../app/controller/CourseController.php');
 class Controller
 {
  public function __construct()
   {
 
 
+     
   }
   public function selectAll($params)
   {
@@ -35,10 +37,14 @@ class Controller
   }
   public static function build($save) {
         // assumes the use of an autoloader
-       
+     
+
+        
+
 
         $type=$save."Controller";
         if (class_exists($type)) {
+
             return new $type($save);
         }
         else

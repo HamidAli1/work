@@ -8,91 +8,105 @@ class Model
     public $table_name;
     public $colums_name;
  public function __construct()
-{
-   
+{ 
     $this->db = Database::getInstance()->getConnection();
-
 }
 
 public static function build($type) { 
-        // assumes the use of an autoloader
-	   
-        
-        $saved=$type."Model";
-           
       
+	   
+         
+        $saved=$type."Model";
         require_once ('../app/model/'.$saved. '.php');
-          
-        if (class_exists($saved)) {
-
-
-            return new $saved();
+        if (class_exists($saved)) 
+        {
+          return new $saved();
         }
         else
         {
-
             throw new Exception("Invalid product type given.");
         }
     } 
 
 
-public function selectAll($params)
+public function selectAll($par)
 {
        
-         
-        if($params['id'])
-        {
-          $sql = "SELECT * FROM ".$this->table_name. " where id ='".$params['id']."'";   
+           
+        if(array_filter($par))
+        { 
+
+             $m=key($par);
+             $n=$par[$m];
+           
+          $sql = "SELECT * FROM ".$this->table_name. " where ".$m." ='".$n."'"; 
         }
         else
         {
          $sql = "SELECT * FROM ".$this->table_name;   
-        }
+        }  
 
-
-         // echo $sql;
+         
          $result = $this->db->query($sql);
          return $result;
 }
-public function create($params)
-{
-
-}
 public function update($params)
 {
+     $uid=$params['id'];
+     unset($params['id']);
+     if (!array_filter($params)) 
+     {
+            echo "All the fields cannot be Empty";
+       
+     }
+     else
+     {
 
-       $save_count=count($this->coloms_name);
-       $k=1;
-      $sql = "UPDATE ".$this->table_name." SET ";
-        foreach ( $this->coloms_name as $value) {
-        $sql=$sql.$value."='".$params[$value] ."'";
-        if($k++!=4)
+        $save_count=count($this->coloms_name);
+        $k=1;
+        $sql = "UPDATE ".$this->table_name." SET ";
+        foreach ( $this->coloms_name as $value) 
         {
-         $sql= $sql.", ";
+            $sql=$sql.$value."='".$params[$value] ."'";
+             if($k++!= $save_count)
+             {
+                $sql= $sql.", ";
+             }
+                
         }
-}
+        $sql=$sql." WHERE id =".$uid;
+        $result = $this->db->query($sql);
+     }
 
-$sql=$sql." WHERE id =".$params['id'];
-
- 
-        
-     $result = $this->db->query($sql);
 }
 public function insert($params)
 {
-     $sql = "INSERT INTO ".$this->table_name;
+   
 
-     // implode keys of $array...
-     $sql .= " (`".implode("`, `", $this->coloms_name)."`)";
-     $sql .= " VALUES ('".implode("', '", $params)."') ";
-     $result = $this->db->query($sql);
+        if (!array_filter($params))
+        {
+             echo "All the fields cannot be Empty";
+        }
+        else
+        {
+
+              $sql = "INSERT INTO ".$this->table_name;
+              $sql .= " (`".implode("`, `", $this->coloms_name)."`)";
+              $sql .= " VALUES ('".implode("', '", $params)."') ";
+              $result = $this->db->query($sql);
+        }     
     
 }
-public function delete($params)
+public function delete($par)
 {
 
-             $sql_query ="DELETE FROM ".    $this->table_name." WHERE id =".$params['id'] ;
+             $m=key($par);
+             $n=$par[$m];
+
+             $sql_query ="DELETE FROM ".    $this->table_name." WHERE ".$m." =".$n;
+
              $result = $this->db->query($sql_query);
+
 }
 }
 
